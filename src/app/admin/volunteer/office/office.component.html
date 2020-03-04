@@ -1,0 +1,13 @@
+<nz-breadcrumb  class="office-bread">
+    <nz-breadcrumb-item>
+      办公室值班
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+      {{chooseTab}}
+    </nz-breadcrumb-item>
+  </nz-breadcrumb>
+  <nz-tabset class="office-tabs">
+    <nz-tab [nzTitle]="office.name"  *ngFor="let office of officeyType" (nzSelect)="tabSelect(office.name)">
+      <app-office-tab [typeId] = "office.id"></app-office-tab>
+    </nz-tab>
+  </nz-tabset>

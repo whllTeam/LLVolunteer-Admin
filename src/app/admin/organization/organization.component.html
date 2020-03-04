@@ -1,0 +1,39 @@
+<div *ngIf="organizations?.length > 0">
+  <div class="btn-operate">
+    <button nz-button nzType="primary" (click)="modifiClick(-1)">添加志愿组织</button>
+  </div>
+    <nz-table #basicTable
+     [nzData]="organizations"
+     [nzShowPagination]="false"
+     >
+        <thead>
+          <tr>
+            <th>组织名称</th>
+            <th>来自于</th>
+            <th>描述</th>
+            <th>联系方式</th>
+            <th>是否显示</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let org of basicTable.data;let i = index">
+            <td>{{ org.organizerName }}</td>
+            <td>{{ org.from }}</td>
+            <td>{{ org.description }}</td>
+            <td>{{ org.contact }}</td>
+             <td>
+                <nz-switch  [(ngModel)]="!organizationsCopy[i].isDel"   (click)="delOrganization(org.id,!organizationsCopy[i].isDel,i)" [nzControl]="true"></nz-switch>
+            </td>
+            <td>
+              <a (click)="modifiClick(org.id, org)">修改</a>
+              <nz-divider nzType="vertical"></nz-divider>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+
+      <nz-pagination [nzPageSize]="pageSize" [nzShowTotal]="showTotal" [nzPageIndex]="pageIndex" [nzTotal]="pageTotalCount" (nzPageIndexChange)="loadData($event)" class="page"></nz-pagination>
+      <ng-template #showTotal>每页{{pageSize}}条,共{{pageTotalCount}}条数据</ng-template>
+</div>
+<app-notify-message #notifyMessage></app-notify-message>

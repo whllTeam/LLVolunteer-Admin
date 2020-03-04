@@ -1,0 +1,18 @@
+<nz-upload
+nzType="drag"
+[nzSize]="2048"
+[nzMultiple]="true"
+[nzLimit]="2"
+[nzAction]="uploadAction"
+(nzChange)="handleChange($event)"
+[nzFileType]="'image/bmp,application/msword,image/jpeg'"
+>
+<!--IMIE  类型-->
+<p class="ant-upload-drag-icon">
+  <i nz-icon type="inbox"></i>
+</p>
+<p class="ant-upload-text">附件上传</p>
+<p class="ant-upload-hint">
+  支持以下格式(doc、jpg),单文件不能超过2M，附件数不超过2个
+</p>
+</nz-upload>

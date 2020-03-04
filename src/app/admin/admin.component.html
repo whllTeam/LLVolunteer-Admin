@@ -1,0 +1,49 @@
+<nz-layout>
+  <nz-sider
+    style=" height: 100vh; left: 0"
+    nzCollapsible
+    [(nzCollapsed)]="isCollapsed"
+    [nzWidth]="width"
+    [nzReverseArrow]="isReverseArrow">
+    <div class="logo"></div>
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+      <li nz-menu-item>
+      <span title><i nz-icon type="team"></i><span class="nav-text" (click)="itemClick('志愿动态')"><a [routerLink]="['index']">志愿动态</a></span></span>
+      </li>
+      <li nz-menu-item>
+          <span (click)="itemClick('志愿活动')"><i nz-icon type="file"></i><span class="nav-text"><a [routerLink]="['activity']">志愿活动</a></span></span>
+        </li>
+      <li nz-menu-item>
+          <span (click)="itemClick('志愿组织')"><i nz-icon type="file"></i><span class="nav-text"><a [routerLink]="['organization']"> 志愿组织</a></span></span>
+        </li>
+      <li nz-submenu>
+        <span title><i nz-icon type="team"></i><span class="nav-text" (click)="itemClick('志愿活动')">志愿项目</span></span>
+        <ul>
+          <li nz-menu-item (click)="itemClick('寝室楼')"><a [routerLink]="['volunteer/dormitory']">寝室楼</a></li>
+          <li nz-menu-item (click)="itemClick('办公室')"><a [routerLink]="['volunteer/office']">办公室</a></li>
+          <li nz-menu-item (click)="itemClick('其它活动')"><a [routerLink]="['volunteer/activity']">其它活动</a></li>
+        </ul>
+      </li>
+      <li nz-submenu>
+        <span title (click)="itemClick('活动报表')"><i nz-icon type="file"></i><span class="nav-text">活动报表</span></span>
+        <ul>
+          <li nz-menu-item (click)="itemClick('寝室楼')"><a [routerLink]="['report/dormitory']">寝室楼</a></li>
+          <li nz-menu-item (click)="itemClick('办公室')"><a [routerLink]="['report/office']">办公室</a></li>
+          <li nz-menu-item (click)="itemClick('其它活动')"><a [routerLink]="['report/activity']">其它活动</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header style="background: #fff; padding:0;"></nz-header>
+    <nz-content style="margin:0 16px;">
+      <nz-breadcrumb style="margin:16px 0;">
+        <nz-breadcrumb-item *ngFor="let item of bread">{{item}}</nz-breadcrumb-item>
+      </nz-breadcrumb>
+      <div style="padding:24px; background: #fff; min-height: 360px;">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+      <nz-footer style="text-align: center;">志愿服务平台 ©2019</nz-footer>
+  </nz-layout>
+</nz-layout>

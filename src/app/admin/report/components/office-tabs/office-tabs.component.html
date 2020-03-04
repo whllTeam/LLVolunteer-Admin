@@ -1,0 +1,10 @@
+<div nz-row>
+  <div nz-col [nzSpan]="4" *ngFor="let week of officeWeek" class="card-container">
+    <nz-card [nzTitle]="week.name" class="card-week">
+      <div *ngFor="let officeTime of officeTime">
+          <nz-card [nzTitle]="officeTime.name" class="card-class">
+              <nz-tag [nzColor]=" checkHasUser(week.id,officeTime.id) ? '#108ee9' : 'red'">{{getUserName(week.id,officeTime.id)}}</nz-tag>
+          </nz-card>
+      </div>
+    </nz-card>
+</div>

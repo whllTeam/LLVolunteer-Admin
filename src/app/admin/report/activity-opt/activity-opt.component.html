@@ -1,0 +1,40 @@
+<div *ngIf="activitySignTables?.length > 0">
+  <nz-table #nzTable
+  [nzData]="activitySignTables"
+  [nzShowPagination]="false"
+  >
+    <thead>
+      <tr>
+        <th nzShowExpand></th>
+        <th>活动名称</th>
+        <th>所属组织</th>
+        <th>活动状态</th>
+        <th>所容纳最大人数</th>
+        <th>当前报名人数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-template ngFor let-data [ngForOf]="nzTable.data">
+        <tr>
+          <td [nzShowExpand]="data.signUserInfo.length > 0" [(nzExpand)]="mapOfSign[data.id]"></td>
+          <td>{{ data.activityName }}</td>
+          <td>{{ data.organizationName }}</td>
+          <td><nz-tag [nzColor]="data.activityState === 1 ? 'red' : data.activityState === 2 ? '#2db7f5' : '#87d068'">{{ data.activityStateTypeStr }}</nz-tag></td>
+          <td><nz-tag [nzColor]="'red'">{{ data.signMaxNum }}</nz-tag></td>
+          <td><nz-tag [nzColor]="'cyan'">{{ data.hasSignCount }}</nz-tag> </td>
+        </tr>
+        <tr [nzExpand]="mapOfSign[data.id]">
+          <td></td>
+          <td colspan="5">
+            <nz-tag [nzColor]="'#48D1CC'" *ngFor="let name of data.signUserInfo">
+              {{name}}
+            </nz-tag>
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </nz-table>
+  <nz-pagination [nzPageSize]="pageSize" [nzShowTotal]="showTotal" [nzPageIndex]="pageIndex" [nzTotal]="pageTotalCount" (nzPageIndexChange)="loadData($event)" class="page"></nz-pagination>
+  <ng-template #showTotal>每页{{pageSize}}条,共{{pageTotalCount}}条数据</ng-template>
+</div>
+

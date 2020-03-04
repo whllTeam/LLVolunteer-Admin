@@ -1,0 +1,38 @@
+<div *ngIf="activitySignInfos?.length > 0">
+  <div class="btn-operate">
+  </div>
+    <nz-table #basicTable
+     [nzData]="activitySignInfos"
+     [nzShowPagination]="false"
+     >
+        <thead>
+          <tr>
+            <th>报名人姓名</th>
+            <th>活动名称</th>
+            <th>所属组织</th>
+            <th>报名次数</th>
+            <th>取消报名次数</th>
+            <th>报名日期</th>
+            <th>当前状态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let activity of basicTable.data;let i = index">
+            <td>{{ activity.userName }}</td>
+            <td>{{ activity.activityName }}</td>
+            <td>{{ activity.organizationName }}</td>
+            <td>{{ activity.signCount }}</td>
+            <td>{{ activity.cancelCount }}</td>
+            <td>{{ activity.createTime }}</td>
+            <td><nz-tag [nzColor]="activity.isSign ? '#f50' : 'red'">{{ activity.isSignStr }}</nz-tag></td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <nz-pagination
+      [nzShowTotal]="showTotal"
+      [nzPageIndex]="pageIndex"
+      [nzPageSize]="pageSize"
+      [nzTotal]="pageTotalCount" (nzPageIndexChange)="loadData($event)" class="page"></nz-pagination>
+      <ng-template #showTotal>每页{{pageSize}}条,共{{pageTotalCount}}条数据</ng-template>
+</div>
+<app-notify-message #notifyMessage></app-notify-message>

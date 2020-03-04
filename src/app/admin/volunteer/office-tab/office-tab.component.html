@@ -1,0 +1,53 @@
+<div *ngIf="volunteerSignInfos?.length > 0">
+  <div class="btn-operate">
+  </div>
+    <nz-table #basicTable
+     [nzData]="volunteerSignInfos"
+     [nzShowPagination]="false"
+     >
+        <thead>
+          <tr>
+            <th>报名人姓名</th>
+            <th>志愿服务类型</th>
+            <th>志愿服务名称</th>
+            <th>星期</th>
+            <th>时间段</th>
+            <th>报名次数</th>
+            <th>取消报名次数</th>
+            <th>报名日期</th>
+            <th>有效状态</th>
+            <th>审核状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let info of basicTable.data;let i = index">
+            <td>{{ info.userName }}</td>
+            <td>{{ info.typeStr }}</td>
+            <td>{{ info.volunteerName }}</td>
+            <td><nz-tag [nzColor]="getWeekColor(info.weekInfoName)">{{ info.weekInfoName }}</nz-tag> </td>
+            <td><nz-tag [nzColor]="getTimeColor(info.detailTimes)">{{ info.detailTimes }}</nz-tag></td>
+            <td>{{ info.signCount}}</td>
+            <td>{{ info.cancelCount}}</td>
+            <td>{{ info.createTime }}</td>
+            <td><nz-tag [nzColor]="info.canCheck === true ? '#2db7f5' : 'cyan'" >{{ info.cancheckStr}}</nz-tag></td>
+           <td><nz-tag [nzColor]="info.signState === 2 ? '#f50' : 'red'">{{ info.signStateStr }}</nz-tag></td>
+            <td>
+              <button [disabled]="!info.canCheck" nz-button nzType="primary" (click)="checkHandle(info)">审核通过</button>
+              <nz-divider nzType="vertical"></nz-divider>
+              <!-- <a>审核拒绝</a>
+              <nz-divider nzType="vertical"></nz-divider> -->
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <nz-pagination
+      [nzPageIndex]="pageIndex"
+      [nzTotal]="pageTotalCount"
+      [nzPageSize]="pageSize"
+      (nzPageIndexChange)="loadData($event)"
+      [nzShowTotal]="showTotal"
+      class="page"></nz-pagination>
+      <ng-template #showTotal>每页{{pageSize}}条,共{{pageTotalCount}}条数据</ng-template>
+</div>
+<app-notify-message #notifyMessage></app-notify-message>

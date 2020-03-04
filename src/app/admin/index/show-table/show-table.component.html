@@ -1,0 +1,47 @@
+<form nz-form [formGroup]="pageFormGroup" class="login-form" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7">标题</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <nz-input-group>
+        <input type="text" nz-input formControlName="title" placeholder="标题" />
+      </nz-input-group>
+      <nz-form-explain *ngIf="pageFormGroup.get('title')?.dirty && pageFormGroup.get('title')?.errors">请输入标题
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7">描述信息</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <nz-input-group>
+        <input type="text" nz-input formControlName="description" placeholder="描述信息" />
+      </nz-input-group>
+      <nz-form-explain *ngIf="pageFormGroup.get('description')?.dirty && pageFormGroup.get('description')?.errors">
+        请输入描述信息</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+      <nz-form-label [nzSpan]="7">内容</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <nz-input-group>
+        <textarea nz-input rows="20" formControlName="content" placeholder="内容"></textarea>
+      </nz-input-group>
+      <nz-form-explain *ngIf="pageFormGroup.get('content')?.dirty && pageFormGroup.get('content')?.errors">请输入内容
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7">所属组织</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <nz-select formControlName="orgId">
+        <nz-option *ngFor="let org of organizationInfos" [nzValue]="org?.id" [nzLabel]="org?.organizerName"></nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf="pageFormGroup.get('orgId')?.dirty && pageFormGroup.get('orgId')?.errors">请选择所属组织
+        </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <app-image-upload [fileType]="uploadImageType" [loadFileList]="$fileUploadLoad" ($fileList)="fileListSub($event)"></app-image-upload>
+    </nz-form-control>
+  </nz-form-item>
+</form>
